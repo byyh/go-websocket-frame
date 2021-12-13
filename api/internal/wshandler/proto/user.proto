@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package social.api.ws;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "common.proto";
+
+// 二级cmd的枚举类型必须以Cmd为前缀，后面的名称必须和service的名称相同
+// 枚举的值必须是枚举类型名称+rpc定义的函数名称，驼峰式
+enum CmdUser {
+	CmdUserInitSelf = 0;
+	CmdUserGetSelfInfo = 1;
+	CmdUserGetRecommendUserList = 2;
+}
+
+message InitSelfReq {
+	// 性别
+    uint32 sex = 1;
+    // 昵称
+    bool nick_name = 2;
+    // 生日
+    int64 birthday = 3;
+    // 头像地址
+    string avatar = 4;
+}
+
+message UserInfoResp {
+	// 用户id
+	int64 user_id = 1;
+	// 性别
+    uint32 sex = 2;
+    // 昵称
+    string nick_name = 3;
+    // 生日
+    string birthday = 4;
+    // 头像地址
+    string avatar = 5;
+    // 是否填写了附加信息
+    int64 is_input_user_info = 6;
+    // 城市编码
+    string city_code = 7;
+    // 认证类型，0未认证，2实名认证，4视频认证
+    uint32 authentication_type = 8;
+    // 是否是vip 0不是 1是
+    uint32 is_vip = 9;
+    // 用户在线状态 0：离线 1：在线 2：忙碌
+    int32 online_status = 10;
+
+}
+
+message UserListReq {
+	PageType page = 1;
+	google.protobuf.UInt32Value sex = 2;
+	google.protobuf.StringValue city_code = 3;
+}
+
+message UserListResp {
+	repeated UserInfoResp list = 1;
+	
+}
+
+service User {
+	// 初始化本人信息
+    rpc InitSelf(InitSelfReq) returns (Empty) {}
+    
+    // 获取本人信息
+    rpc GetSelfInfo(Empty) returns (UserInfoResp) {}
+
+    // 获取推荐用户列表
+    rpc GetRecommendUserList(UserListReq) returns (UserListResp) {}
+}

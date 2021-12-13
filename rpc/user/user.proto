@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package user;
+
+message RegisterReq {
+	mobile string = 1;
+	verify string = 2;
+	deviceCode string = 3;
+	latitude string = 4;
+	longitude string = 5;
+	channelName string = 6;
+	versionName string = 7;
+}
+
+
+service User {
+  rpc Login(Request) returns(Response);
+}

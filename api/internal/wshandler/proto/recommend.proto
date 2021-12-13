@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package social.api.ws;
+
+import "user.proto";
+
+// 二级cmd的枚举类型必须以Cmd为前缀，后面的名称必须和service的名称相同
+// 枚举的值必须是枚举类型名称+rpc定义的函数名称，驼峰式
+enum CmdUserList {
+
+	CmdUserListGetSelfInfo = 0;
+	CmdUserListGetRecommendList = 5;
+}
+
+message RecommendReq{
+	uint32 sex = 2;
+	string city_code = 3;
+}
+
+service UserList {
+	// 获取推荐用户列表
+    rpc GetRecommendList(RecommendReq) returns (UserListResp) {}
+}

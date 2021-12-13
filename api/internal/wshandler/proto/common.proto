@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package social.api.ws;
+
+message Empty {}
+
+message IdReq {
+    int64 id = 1;
+}
+
+message IdsReq {
+    repeated int64 ids = 1;
+}
+
+message IdsResp {
+    repeated int64 ids = 1;
+}
+
+message PageType {
+    uint32 current = 1;
+    uint32 size = 2;
+}

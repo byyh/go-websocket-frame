@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package social.api.ws;
+
+// 一级cmd，命名必须以CmdBase为前缀，驼峰式。
+enum CmdBase {
+	CmdBaseErr = 0;
+	CmdBaseLogin = 2;
+	CmdBaseUser = 5;
+	
+	CmdBaseUserList = 30;
+}
+
+
+

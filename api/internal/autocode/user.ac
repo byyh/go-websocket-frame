@@ -1,0 +1,23 @@
+
+// 用户相关
+service user {
+	// 通过id获取用户信息
+	func detailById(detailByIdReq) return(detailByIdResp) 
+	
+	// 获取首页用户列表
+	func listForHome(listForHomeReq) return(listForHomeResp) 
+	
+	// 编辑用户信息
+	func update(updateReq) return(updateResp)
+}
+
+// 消息相关
+service message {
+	// 通过id获取用户信息
+	func getById(getReq) return(getResp)
+	
+	// 获取首页用户列表
+	func list(listReq) return(listResp)
+
+	func detail(updateReq) return(updateResp)	
+}

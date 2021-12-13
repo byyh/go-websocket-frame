@@ -1,0 +1,44 @@
+Name: job-queue
+RunMode: test
+Debug : treu
+
+MysqlDns: mysqluser:123456@tcp(127.0.0.1:3306)/test?charset=utf8&parseTime=true
+
+RedisConf:
+    Host: 127.0.0.1:6379
+    Pass: ""
+    Type: node 
+    Dbnum: 2
+
+FluentLogConf:
+    Isopen: false
+    Host: 127.0.0.1
+    Port: 2000
+    Tag: "social-api"  
+
+# 消息队列配置，可配置多个
+RabbitmqConf:
+  - AmqpUrl: "amqp://admin:admin@192.168.17.27:5672/dev_social_new"
+    QueueName: tst_queue_1
+    ExchangeName: tst_exchange_1   
+    ExchangeType: fanout   
+    ExchangeDurable: true
+    RoutingKey: ""
+    Durable: true
+    RunQuantity: 20
+  - AmqpUrl: "amqp://admin:admin@192.168.17.27:5672/dev_social_new"
+    QueueName: tst_queue_2
+    ExchangeName: tst_exchange_1    
+    ExchangeType: fanout 
+    ExchangeDurable: true
+    RoutingKey: ""
+    Durable: true
+    RunQuantity: 10
+  - AmqpUrl: "amqp://admin:admin@192.168.17.27:5672/dev_social_new"
+    QueueName: tst_queue_3
+    ExchangeName: tst_exchange_1    
+    ExchangeType: fanout   
+    ExchangeDurable: true
+    RoutingKey: ""
+    Durable: true
+    RunQuantity: 5

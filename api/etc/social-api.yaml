@@ -1,0 +1,32 @@
+Name: social-api
+Host: 0.0.0.0
+Port: 7001
+RunMode: debug
+Debug: true
+
+MysqlDns: mysqluser:123456@tcp(127.0.0.1:3306)/test2?charset=utf8mb4&parseTime=true
+
+RedisConf:
+    Host: 127.0.0.1:6379
+    Pass: ""
+    Type: node 
+    Dbnum: 1
+
+
+FluentLogConf:
+    Isopen: false
+    Host: 127.0.0.1
+    Port: 2000
+    Tag: "social-api"    
+
+
+# 消息队列配置，可配置多个
+RabbitmqConf:
+  - AmqpUrl: "amqp://admin:admin@192.168.17.27:5672/dev_social_new"
+    QueueName: tst_api_proc_queue_1
+    ExchangeName: tst_api_proc_exchange_1   
+    ExchangeType: fanout   
+    ExchangeDurable: true
+    RoutingKey: ""
+    Durable: true
+    RunQuantity: 1
