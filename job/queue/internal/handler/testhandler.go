@@ -3,7 +3,7 @@ package handler
 import (
 	"time"
 
-	"github.com/tal-tech/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 // 测试样例

@@ -1,4 +1,3 @@
-
 package bsshopemployee
 
 import (
@@ -57,23 +56,22 @@ type Repository interface {
 
 	// 编辑
 	Update(data map[string]interface{}) error
-	
+
 	// barch编辑
 	UpdateBatch(datas []map[string]interface{}) error
 
 	// 删除
 	Delete(ids []int64, updatedBy int64) error
-	
+
 	// 简单条件查询
 	QueryByMaps(data map[string]interface{}, pageSize, current int, order string) (res []model.BsShopEmployee, err error)
-	
+
 	// 简单条件查询数量
 	QueryTotalByMaps(data map[string]interface{}) (res int64, err error)
-	
+
 	// 简单条件查询
 	QueryByWhere(pageSize, current int, order, where string, param ...interface{}) (res []model.BsShopEmployee, err error)
-	
+
 	// 简单条件查询数量
 	QueryTotalByWhere(where string, param ...interface{}) (res int64, err error)
 }
-

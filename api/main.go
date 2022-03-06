@@ -3,10 +3,6 @@ package main
 import (
 	"context"
 	"flag"
-	"net/http"
-	"os"
-	"os/signal"
-	"runtime"
 	globalapi "go-websocket-frame/api/global"
 	"go-websocket-frame/api/internal/config"
 	"go-websocket-frame/api/internal/consumer"
@@ -14,6 +10,10 @@ import (
 	"go-websocket-frame/api/ws"
 	"go-websocket-frame/common/global"
 	"go-websocket-frame/common/global/plugin/log"
+	"net/http"
+	"os"
+	"os/signal"
+	"runtime"
 	"strconv"
 	"syscall"
 	"time"
@@ -22,7 +22,7 @@ import (
 
 	"go-websocket-frame/api/router"
 
-	"github.com/tal-tech/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/conf"
 )
 
 var configFile = flag.String("f", "etc/social-api.yaml", "the config file")

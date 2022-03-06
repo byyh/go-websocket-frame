@@ -8,7 +8,7 @@ import (
 	globalapi "go-websocket-frame/job/crontab/global"
 	"go-websocket-frame/job/crontab/internal/config"
 
-	"github.com/tal-tech/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/conf"
 )
 
 var configFile = flag.String("f", "etc/crontab.yaml", "the config file")
