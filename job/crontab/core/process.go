@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/robfig/cron"
-	log "github.com/tal-tech/go-zero/core/logx"
+	log "github.com/zeromicro/go-zero/core/logx"
 )
 
 var (

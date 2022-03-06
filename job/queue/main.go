@@ -2,17 +2,17 @@ package main
 
 import (
 	"flag"
-	"os"
-	"os/signal"
 	"go-websocket-frame/common/global"
 	"go-websocket-frame/common/global/plugin/log"
 	globalapi "go-websocket-frame/job/queue/global"
 	"go-websocket-frame/job/queue/internal/config"
 	"go-websocket-frame/job/queue/internal/handler"
+	"os"
+	"os/signal"
 	"syscall"
 	"time"
 
-	"github.com/tal-tech/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/conf"
 )
 
 var configFile = flag.String("f", "etc/queue.yaml", "the config file")

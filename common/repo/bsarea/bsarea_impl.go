@@ -1,4 +1,3 @@
-
 package bsarea
 
 import (
@@ -15,17 +14,16 @@ import (
 	"gorm.io/gorm"
 )
 
-
 // 创建
 func (r *repository) Create(data *model.BsArea) (int64, error) {
 	odb := r.db
-	
+
 	err := odb.Create(&data).Error
 	if err != nil {
 		log.Error("[repo.BsArea.Create] 创建发生错误，err：", err)
 		return 0, errors.New("创建BsArea发生错误")
 	}
-	
+
 	return data.Id, nil
 }
 
@@ -35,15 +33,15 @@ func (r *repository) Update(data map[string]interface{}) error {
 	if !ok {
 		return errors.New("必须上传id参数")
 	}
-	
+
 	odb := r.db
-	
+
 	if err := odb.Model(&model.BsArea{}).Where("id=?", data["id"]).
 		Updates(data).Error; err != nil {
 		log.Error("[repo.BsArea.Update] 编辑发生错误，err：", err)
 		return errors.New("编辑BsArea发生错误")
 	}
-	
+
 	if r.isCache {
 		key := "social-db-BsArea"
 		// 从缓存中获取数据
@@ -79,7 +77,7 @@ func (r *repository) UpdateBatch(datas []map[string]interface{}) error {
 			return errors.New("必须上传id参数")
 		}
 	}
-	
+
 	tx := r.db.Begin()
 
 	for i, data := range datas {
@@ -93,7 +91,7 @@ func (r *repository) UpdateBatch(datas []map[string]interface{}) error {
 	}
 
 	tx.Commit()
-	
+
 	if r.isCache {
 		key := "social-db-BsArea"
 
@@ -123,7 +121,6 @@ func (r *repository) UpdateBatch(datas []map[string]interface{}) error {
 		}
 	}
 
-
 	return nil
 }
 
@@ -138,7 +135,7 @@ func (r *repository) Delete(ids []int64, updatedBy int64) error {
 		log.Error("[repo.BsArea.Close] 关闭发生错误，err：", err)
 		return errors.New("关闭BsArea发生错误")
 	}
-	
+
 	if r.isCache {
 		key := "social-db-BsArea"
 
@@ -171,11 +168,10 @@ func (r *repository) Delete(ids []int64, updatedBy int64) error {
 	return nil
 }
 
-
-// 单个	
+// 单个
 func (r *repository) GetById(id int64) (*model.BsArea, error) {
 	var data model.BsArea
-	
+
 	key := "social-db-BsArea"
 
 	// 判断缓存
@@ -215,7 +211,7 @@ func (r *repository) GetById(id int64) (*model.BsArea, error) {
 			return &data, nil
 		}
 	}
-	
+
 	err := r.db.Model(&model.BsArea{}).Where("id=?", id).First(&data).Error
 	if err != nil {
 		if gorm.ErrRecordNotFound == err {
@@ -224,7 +220,7 @@ func (r *repository) GetById(id int64) (*model.BsArea, error) {
 		log.Error("[repo.BsArea.GetById] 查询指定活动发生错误，err：", err)
 		return nil, err // 包含不存在情况
 	}
-	
+
 	if r.isCache {
 		bt, err := json.Marshal(&data)
 		if nil != err {
@@ -255,7 +251,6 @@ func (r *repository) GetListByIds(ids []int64) (res []model.BsArea, err error) {
 	return
 }
 
-
 func (r *repository) QueryByMaps(data map[string]interface{},
 	pageSize, current int, order string) (res []model.BsArea, err error) {
 	offset := (current - 1) * pageSize
@@ -269,7 +264,6 @@ func (r *repository) QueryByMaps(data map[string]interface{},
 	return
 }
 
-
 func (r *repository) QueryTotalByMaps(data map[string]interface{}) (res int64, err error) {
 	err = r.db.Model(&model.BsArea{}).
 		Where(data).
@@ -281,11 +275,10 @@ func (r *repository) QueryTotalByMaps(data map[string]interface{}) (res int64, e
 	return
 }
 
-
 func (r *repository) QueryByWhere(pageSize, current int, order, where string,
 	param ...interface{}) (res []model.BsArea, err error) {
 	offset := (current - 1) * pageSize
-		
+
 	err = r.db.Model(&model.BsArea{}).
 		Where(where, param...).Order(order).
 		Offset(offset).Limit(pageSize).Find(&res).Error
@@ -295,7 +288,6 @@ func (r *repository) QueryByWhere(pageSize, current int, order, where string,
 
 	return
 }
-
 
 func (r *repository) QueryTotalByWhere(where string,
 	param ...interface{}) (res int64, err error) {
@@ -308,4 +300,3 @@ func (r *repository) QueryTotalByWhere(where string,
 
 	return
 }
-

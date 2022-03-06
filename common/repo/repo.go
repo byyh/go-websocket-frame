@@ -4,15 +4,13 @@ package repo
 import (
 	"go-websocket-frame/common/atom"
 	"go-websocket-frame/common/global/plugin/log"
-	
 
 	"go-websocket-frame/common/repo/bsarea"
 	"go-websocket-frame/common/repo/bsshopemployee"
 )
 
 var (
-
-	bsareaRepo bsarea.Repository
+	bsareaRepo         bsarea.Repository
 	bsshopemployeeRepo bsshopemployee.Repository
 )
 
@@ -35,8 +33,6 @@ func GetBsareaRepo() bsarea.Repository {
 	return bsareaRepo
 }
 
-
 func GetBsshopemployeeRepo() bsshopemployee.Repository {
 	return bsshopemployeeRepo
 }
-
